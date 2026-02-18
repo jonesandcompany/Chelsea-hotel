@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>W. A. Jones — Photographer, NYC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --paper: #f2ede6;
+      --ink: #1a1814;
+      --rust: #8b4a2b;
+      --muted: #8a8278;
+      --line: rgba(26,24,20,0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'EB Garamond', serif;
+      font-size: 16px;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* ── HEADER ── */
+    header {
+      padding: 40px 40px 0;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: baseline;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 16px;
+    }
+
+    .header-left {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .header-title {
+      font-size: 13px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      text-align: center;
+      font-weight: 400;
+    }
+
+    .header-right {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      text-transform: uppercase;
+      text-align: right;
+    }
+
+    /* ── HERO STATEMENT ── */
+    .hero {
+      padding: 80px 40px 60px;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 40px;
+      align-items: end;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      align-self: center;
+    }
+
+    .hero-text h1 {
+      font-size: clamp(48px, 7vw, 88px);
+      font-weight: 400;
+      line-height: 0.92;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-text h1 em {
+      font-style: italic;
+      color: var(--rust);
+    }
+
+    .hero-sub {
+      margin-top: 32px;
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      text-transform: uppercase;
+      max-width: 360px;
+      line-height: 1.8;
+    }
+
+    /* ── SECTION DIVIDERS ── */
+    .section-header {
+      padding: 20px 40px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .section-header span {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .section-header em {
+      font-style: italic;
+      font-size: 14px;
+      color: var(--ink);
+    }
+
+    /* ── PHOTO LAYOUTS ── */
+
+    /* Full bleed single */
+    .layout-full {
+      width: 100%;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .layout-full img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+      touch-action: pinch-zoom;
+    }
+
+    .layout-full:hover img { transform: scale(1.02); }
+
+    /* Two column */
+    .layout-two {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .layout-two .photo-cell {
+      overflow: hidden;
+      border-right: 1px solid var(--line);
+    }
+
+    .layout-two .photo-cell:last-child { border-right: none; }
+
+    .layout-two img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+      touch-action: pinch-zoom;
+    }
+
+    .layout-two .photo-cell:hover img { transform: scale(1.02); }
+
+    /* Asymmetric: big left, two stacked right */
+    .layout-asymL {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .layout-asymL .big {
+      overflow: hidden;
+      border-right: 1px solid var(--line);
+    }
+
+    .layout-asymL .big img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+      touch-action: pinch-zoom;
+    }
+
+    .layout-asymL .big:hover img { transform: scale(1.02); }
+
+    .layout-asymL .stack {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .layout-asymL .stack .photo-cell {
+      flex: 1;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .layout-asymL .stack .photo-cell:last-child { border-bottom: none; }
+
+    .layout-asymL .stack img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+      touch-action: pinch-zoom;
+      min-height: 200px;
+    }
+
+    .layout-asymL .stack .photo-cell:hover img { transform: scale(1.02); }
+
+    /* Asymmetric: two stacked left, big right */
+    .layout-asymR {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .layout-asymR .stack {
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid var(--line);
+    }
+
+    .layout-asymR .stack .photo-cell {
+      flex: 1;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .layout-asymR .stack .photo-cell:last-child { border-bottom: none; }
+
+    .layout-asymR .stack img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+      touch-action: pinch-zoom;
+      min-height: 200px;
+    }
+
+    .layout-asymR .stack .photo-cell:hover img { transform: scale(1.02); }
+
+    .layout-asymR .big {
+      overflow: hidden;
+    }
+
+    .layout-asymR .big img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+      touch-action: pinch-zoom;
+    }
+
+    .layout-asymR .big:hover img { transform: scale(1.02); }
+
+    /* Three column */
+    .layout-three {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .layout-three .photo-cell {
+      overflow: hidden;
+      border-right: 1px solid var(--line);
+    }
+
+    .layout-three .photo-cell:last-child { border-right: none; }
+
+    .layout-three img {
+      width: 100%;
+      aspect-ratio: 2/3;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+      touch-action: pinch-zoom;
+    }
+
+    .layout-three .photo-cell:hover img { transform: scale(1.02); }
+
+    /* Offset single — smaller, padded, off-center */
+    .layout-offset {
+      padding: 60px 40px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+    }
+
+    .layout-offset.right { justify-content: flex-end; }
+
+    .layout-offset img {
+      width: 55%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+      touch-action: pinch-zoom;
+    }
+
+    .layout-offset:hover img { transform: scale(1.01); }
+
+    /* Wide with margin */
+    .layout-inset {
+      padding: 0 80px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .layout-inset img {
+      width: 100%;
+      aspect-ratio: 16/7;
+      object-fit: cover;
+      display: block;
+      touch-action: pinch-zoom;
+    }
+
+    /* ── CAPTIONS ── */
+    .caption-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 40px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .caption-row span {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .caption-two {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .caption-two span {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0 40px;
+      border-right: 1px solid var(--line);
+    }
+
+    .caption-two span:last-child { border-right: none; }
+
+    .caption-three {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .caption-three span {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0 40px;
+      border-right: 1px solid var(--line);
+    }
+
+    .caption-three span:last-child { border-right: none; }
+
+    /* ── INTERSTITIAL TEXT ── */
+    .text-break {
+      padding: 70px 40px;
+      border-bottom: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .text-break blockquote {
+      font-size: clamp(24px, 3vw, 38px);
+      font-weight: 400;
+      line-height: 1.2;
+      font-style: italic;
+      color: var(--ink);
+    }
+
+    .text-break p {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      line-height: 2;
+    }
+
+    /* ── CLIENTS ── */
+    .clients {
+      padding: 60px 40px;
+      border-bottom: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .clients h3 {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-top: 4px;
+    }
+
+    .clients-photos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .clients-photos img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+      touch-action: pinch-zoom;
+    }
+
+    .clients-photos img:first-child {
+      grid-column: 1 / -1;
+      aspect-ratio: 16/7;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 40px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      border-top: 1px solid var(--line);
+    }
+
+    footer .f-left {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    footer .f-center {
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    footer .f-right {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      text-align: right;
+    }
+
+    footer a {
+      color: var(--rust);
+      text-decoration: none;
+    }
+
+    /* ── LIGHTBOX ── */
+    .lb {
+      position: fixed;
+      inset: 0;
+      background: rgba(18,16,13,0.96);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .lb.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .lb img {
+      max-width: 92vw;
+      max-height: 92vh;
+      object-fit: contain;
+      touch-action: pinch-zoom;
+    }
+
+    .lb-close {
+      position: absolute;
+      top: 28px;
+      right: 36px;
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(242,237,230,0.5);
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .lb-close:hover { color: rgba(242,237,230,1); }
+
+    .lb-caption {
+      position: absolute;
+      bottom: 28px;
+      left: 40px;
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(242,237,230,0.4);
+    }
+
+    /* Clickable photos */
+    .photo-cell, .big, .layout-full, .layout-offset, .layout-inset {
+      cursor: zoom-in;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 700px) {
+      header {
+        padding: 24px 20px 12px;
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+
+      .header-left, .header-right { display: none; }
+      .header-title { text-align: left; }
+
+      .hero {
+        padding: 48px 20px 40px;
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .hero-label { display: none; }
+
+      .section-header { padding: 14px 20px; }
+
+      .layout-two,
+      .layout-asymL,
+      .layout-asymR,
+      .layout-three {
+        grid-template-columns: 1fr;
+      }
+
+      .layout-two .photo-cell { border-right: none; border-bottom: 1px solid var(--line); }
+      .layout-two .photo-cell:last-child { border-bottom: none; }
+
+      .layout-asymL .big { border-right: none; border-bottom: 1px solid var(--line); }
+      .layout-asymR .stack { border-right: none; }
+      .layout-asymR .stack .photo-cell { border-bottom: 1px solid var(--line); }
+
+      .layout-three .photo-cell { border-right: none; border-bottom: 1px solid var(--line); }
+      .layout-three .photo-cell:last-child { border-bottom: none; }
+
+      .layout-two img, .layout-three img { aspect-ratio: 4/3; }
+
+      .layout-asymL .stack img,
+      .layout-asymR .stack img { min-height: 280px; }
+
+      .layout-offset { padding: 30px 20px; }
+      .layout-offset img { width: 85%; }
+
+      .layout-inset { padding: 0 20px; }
+      .layout-inset img { aspect-ratio: 4/3; }
+
+      .caption-row { padding: 8px 20px; }
+
+      .caption-two { grid-template-columns: 1fr; }
+      .caption-two span { border-right: none; border-bottom: 1px solid var(--line); padding: 8px 20px; }
+      .caption-two span:last-child { border-bottom: none; }
+
+      .caption-three { grid-template-columns: 1fr; }
+      .caption-three span { border-right: none; border-bottom: 1px solid var(--line); padding: 8px 20px; }
+      .caption-three span:last-child { border-bottom: none; }
+
+      .text-break {
+        padding: 48px 20px;
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .clients {
+        padding: 48px 20px;
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .clients-photos { grid-template-columns: 1fr; }
+      .clients-photos img:first-child { grid-column: 1; aspect-ratio: 4/3; }
+
+      footer {
+        padding: 32px 20px;
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      footer .f-center { order: -1; margin-bottom: 8px; }
+      footer .f-right { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-left">Hospitality &amp; Travel</div>
+    <div class="header-title">W. A. Jones</div>
+    <div class="header-right">New York City</div>
+  </header>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-label">Portfolio</div>
+    <div class="hero-text">
+      <h1>Places<br>worth<br><em>staying.</em></h1>
+      <p class="hero-sub">Photographer based in New York City.<br>Hotels, interiors &amp; the world between.</p>
+    </div>
+  </div>
+
+  <!-- SECTION: ENGLAND -->
+  <div class="section-header">
+    <span>England</span>
+    <em>York &amp; London</em>
+  </div>
+
+  <!-- Full bleed: Grand York staircase -->
+  <div class="layout-full" onclick="openLb(this)">
+    <img src="R0001303.jpg" alt="The Grand, York — staircase" loading="lazy">
+  </div>
+  <div class="caption-row">
+    <span>The Grand Hotel</span>
+    <span>York, England</span>
+  </div>
+
+  <!-- Asym: peacock florals big left, exterior + bar stacked right -->
+  <div class="layout-asymL">
+    <div class="big" onclick="openLb(this)">
+      <img src="R0001306.jpg" alt="The Grand York — peacock floral arrangement" loading="lazy">
+    </div>
+    <div class="stack">
+      <div class="photo-cell" onclick="openLb(this)">
+        <img src="R0001304.jpg" alt="The Grand York — bar" loading="lazy">
+      </div>
+      <div class="photo-cell" onclick="openLb(this)">
+        <img src="R0001298.jpg" alt="The Grand York — exterior" loading="lazy">
+      </div>
+    </div>
+  </div>
+  <div class="caption-two">
+    <span>The Grand — floral arrangement, bar &amp; facade</span>
+    <span>York, England</span>
+  </div>
+
+  <!-- Offset: St Mary's Abbey ruins -->
+  <div class="layout-offset">
+    <img src="R0001430.jpg" alt="St Mary's Abbey, York" loading="lazy" onclick="openLb(this)" style="cursor:zoom-in">
+  </div>
+  <div class="caption-row">
+    <span>St Mary's Abbey</span>
+    <span>York, England</span>
+  </div>
+
+  <!-- Full bleed: Harrods -->
+  <div class="layout-full" onclick="openLb(this)">
+    <img src="R0001639.jpg" alt="The Grill at Harrods, London" loading="lazy">
+  </div>
+  <div class="caption-row">
+    <span>The Grill at Harrods</span>
+    <span>London</span>
+  </div>
+
+  <!-- TEXT BREAK -->
+  <div class="text-break">
+    <blockquote>"The light in a room tells you everything about the people who chose it."</blockquote>
+    <p>W. A. Jones photographs the spaces that define how we experience a place — lobbies, gardens, dining rooms, terraces at dusk. Work available for editorial commissions, hotel partnerships, and private clients worldwide.</p>
+  </div>
+
+  <!-- SECTION: FRANCE -->
+  <div class="section-header">
+    <span>France</span>
+    <em>Nice &amp; Côte d'Azur</em>
+  </div>
+
+  <!-- Asym: Rothschild interior big right, Nice beach stacked left -->
+  <div class="layout-asymR">
+    <div class="stack">
+      <div class="photo-cell" onclick="openLb(this)">
+        <img src="R0002298.jpg" alt="Promenade des Anglais, Nice" loading="lazy">
+      </div>
+      <div class="photo-cell" onclick="openLb(this)">
+        <img src="R0002570.jpg" alt="Carousel, Cannes" loading="lazy">
+      </div>
+    </div>
+    <div class="big" onclick="openLb(this)">
+      <img src="R0002360.jpg" alt="Villa Ephrussi de Rothschild — interior" loading="lazy">
+    </div>
+  </div>
+  <div class="caption-two">
+    <span>Promenade des Anglais — Nice / Carousel — Cannes</span>
+    <span>Villa Ephrussi de Rothschild — Cap Ferrat</span>
+  </div>
+
+  <!-- Offset right: Rothschild garden -->
+  <div class="layout-offset right">
+    <img src="R0002316.jpg" alt="Villa Ephrussi de Rothschild — garden" loading="lazy" onclick="openLb(this)" style="cursor:zoom-in">
+  </div>
+  <div class="caption-row">
+    <span>Villa Ephrussi de Rothschild — garden</span>
+    <span>Cap Ferrat, France</span>
+  </div>
+
+  <!-- SECTION: ITALY -->
+  <div class="section-header">
+    <span>Italy</span>
+    <em>Florence, Milan &amp; Portofino</em>
+  </div>
+
+  <!-- Three column Italy -->
+  <div class="layout-three">
+    <div class="photo-cell" onclick="openLb(this)">
+      <img src="R0003096.jpg" alt="Florence — Baroque church" loading="lazy">
+    </div>
+    <div class="photo-cell" onclick="openLb(this)">
+      <img src="R0002919.jpg" alt="Milan — blue hearse, ancient ruins" loading="lazy">
+    </div>
+    <div class="photo-cell" onclick="openLb(this)">
+      <img src="R0002688.jpg" alt="Hotel Balbi, Portofino" loading="lazy">
+    </div>
+  </div>
+  <div class="caption-three">
+    <span>Florence</span>
+    <span>Milan</span>
+    <span>Hotel Balbi — Portofino</span>
+  </div>
+
+  <!-- Inset wide: Tuscan hills -->
+  <div class="layout-inset" onclick="openLb(this)" style="cursor:zoom-in">
+    <img src="R0003067.jpg" alt="Tuscan hills, Florence" loading="lazy">
+  </div>
+  <div class="caption-row">
+    <span>Fiesole hills above Florence</span>
+    <span>Tuscany, Italy</span>
+  </div>
+
+  <!-- SECTION: CALIFORNIA -->
+  <div class="section-header">
+    <span>California</span>
+    <em>Palm Springs</em>
+  </div>
+
+  <!-- Two col: Parker umbrellas + fire pit -->
+  <div class="layout-two">
+    <div class="photo-cell" onclick="openLb(this)">
+      <img src="_R005147.jpg" alt="The Parker Palm Springs — pool umbrellas" loading="lazy">
+    </div>
+    <div class="photo-cell" onclick="openLb(this)">
+      <img src="L1270091.jpg" alt="Sunnylands, Rancho Mirage" loading="lazy">
+    </div>
+  </div>
+  <div class="caption-two">
+    <span>The Parker — Palm Springs</span>
+    <span>Sunnylands Estate — Rancho Mirage</span>
+  </div>
+
+  <!-- Asym: Sunnylands big left, Parker shadows + fire pit stacked right -->
+  <div class="layout-asymL">
+    <div class="big" onclick="openLb(this)">
+      <img src="_R005158.jpg" alt="Sunnylands — pergola shadows" loading="lazy">
+    </div>
+    <div class="stack">
+      <div class="photo-cell" onclick="openLb(this)">
+        <img src="_R005146.jpg" alt="The Parker — fire pit gathering" loading="lazy">
+      </div>
+      <div class="photo-cell" onclick="openLb(this)">
+        <img src="C67F8144-D708-44DB-A301-1706C0114EB8.jpg" alt="Palm Springs — striped umbrellas" loading="lazy">
+      </div>
+    </div>
+  </div>
+  <div class="caption-two">
+    <span>Sunnylands — pergola &amp; grounds</span>
+    <span>The Parker — Palm Springs</span>
+  </div>
+
+  <!-- SECTION: NEW YORK -->
+  <div class="section-header">
+    <span>New York</span>
+    <em>NYC</em>
+  </div>
+
+  <!-- Two col NYC -->
+  <div class="layout-two">
+    <div class="photo-cell" onclick="openLb(this)">
+      <img src="_R003591.jpg" alt="NYC — Chesterfield lounge" loading="lazy">
+    </div>
+    <div class="photo-cell" onclick="openLb(this)">
+      <img src="_R006107.jpg" alt="NYC — green door, martinis" loading="lazy">
+    </div>
+  </div>
+  <div class="caption-two">
+    <span>New York City</span>
+    <span>New York City</span>
+  </div>
+
+  <!-- SECTION: COMMISSIONS -->
+  <div class="section-header">
+    <span>Commissions</span>
+    <em>Selected clients</em>
+  </div>
+
+  <div class="clients">
+    <h3>Commercial &amp;<br>editorial work<br><br>Fora Travel<br>New York City<br><br>In association with<br>Rocco Forte Hotels</h3>
+    <div class="clients-photos">
+      <img src="9O6A0670.jpg" alt="Fora Travel — red Porsche" loading="lazy" onclick="openLb(this)" style="cursor:zoom-in;touch-action:pinch-zoom">
+      <img src="fora_staff-6.jpg" alt="Rocco Forte x Fora" loading="lazy" onclick="openLb(this)" style="cursor:zoom-in;touch-action:pinch-zoom">
+      <img src="9O6A0691.jpg" alt="Fora — Book that trip" loading="lazy" onclick="openLb(this)" style="cursor:zoom-in;touch-action:pinch-zoom">
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="f-left">© W. A. Jones — All rights reserved</div>
+    <div class="f-center">W. A. Jones</div>
+    <div class="f-right">Inquiries: <a href="mailto:hello@wajones.co">hello@wajones.co</a></div>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div class="lb" id="lb" onclick="closeLb()">
+    <button class="lb-close" onclick="closeLb()">Close ✕</button>
+    <img id="lb-img" src="" alt="">
+    <div class="lb-caption" id="lb-cap"></div>
+  </div>
+
+  <script>
+    function openLb(el) {
+      const img = el.querySelector ? el.querySelector('img') : el;
+      const src = img.src;
+      const alt = img.alt;
+      document.getElementById('lb-img').src = src;
+      document.getElementById('lb-cap').textContent = alt;
+      document.getElementById('lb').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLb() {
+      document.getElementById('lb').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeLb();
+    });
+
+    // Stop lightbox closing when clicking the image itself
+    document.getElementById('lb-img').addEventListener('click', e => e.stopPropagation());
+  </script>
+
+</body>
+</html>
