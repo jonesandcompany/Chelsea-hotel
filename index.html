@@ -147,7 +147,7 @@
       object-fit: cover;
       display: block;
       transition: transform 0.6s ease;
-      touch-action: pinch-zoom;
+      
     }
 
     .layout-full:hover img { transform: scale(1.02); }
@@ -172,7 +172,7 @@
       object-fit: cover;
       display: block;
       transition: transform 0.6s ease;
-      touch-action: pinch-zoom;
+      
     }
 
     .layout-two .photo-cell:hover img { transform: scale(1.02); }
@@ -195,7 +195,7 @@
       object-fit: cover;
       display: block;
       transition: transform 0.6s ease;
-      touch-action: pinch-zoom;
+      
     }
 
     .layout-asymL .big:hover img { transform: scale(1.02); }
@@ -219,7 +219,7 @@
       object-fit: cover;
       display: block;
       transition: transform 0.6s ease;
-      touch-action: pinch-zoom;
+      
       min-height: 200px;
     }
 
@@ -252,7 +252,7 @@
       object-fit: cover;
       display: block;
       transition: transform 0.6s ease;
-      touch-action: pinch-zoom;
+      
       min-height: 200px;
     }
 
@@ -268,7 +268,7 @@
       object-fit: cover;
       display: block;
       transition: transform 0.6s ease;
-      touch-action: pinch-zoom;
+      
     }
 
     .layout-asymR .big:hover img { transform: scale(1.02); }
@@ -293,7 +293,7 @@
       object-fit: cover;
       display: block;
       transition: transform 0.6s ease;
-      touch-action: pinch-zoom;
+      
     }
 
     .layout-three .photo-cell:hover img { transform: scale(1.02); }
@@ -313,7 +313,7 @@
       object-fit: cover;
       display: block;
       transition: transform 0.6s ease;
-      touch-action: pinch-zoom;
+      
     }
 
     .layout-offset:hover img { transform: scale(1.01); }
@@ -329,7 +329,7 @@
       aspect-ratio: 16/7;
       object-fit: cover;
       display: block;
-      touch-action: pinch-zoom;
+      
     }
 
     /* ── CAPTIONS ── */
@@ -442,7 +442,7 @@
       aspect-ratio: 4/3;
       object-fit: cover;
       display: block;
-      touch-action: pinch-zoom;
+      
     }
 
     .clients-photos img:first-child {
@@ -510,7 +510,7 @@
       max-width: 92vw;
       max-height: 92vh;
       object-fit: contain;
-      touch-action: pinch-zoom;
+      
     }
 
     .lb-close {
@@ -657,7 +657,7 @@
 
   <!-- Full bleed: Grand York staircase -->
   <div class="layout-full" onclick="openLb(this)">
-    <img src="R0001303.jpg" alt="The Grand, York — staircase" loading="lazy" style="object-position:center top">
+    <img src="R0001303.jpg" alt="The Grand, York — staircase" loading="lazy" style="object-position:center center">
   </div>
   <div class="caption-row">
     <span>The Grand Hotel</span>
@@ -684,8 +684,8 @@
   </div>
 
   <!-- Offset: St Mary's Abbey ruins -->
-  <div class="layout-offset">
-    <img src="R0001430.jpg" alt="St Mary's Abbey, York" loading="lazy" onclick="openLb(this)" style="cursor:zoom-in;object-position:center top">
+  <div class="layout-offset" onclick="openLb(this)" style="cursor:zoom-in">
+    <img src="R0001430.jpg" alt="St Mary's Abbey, York" loading="lazy">
   </div>
   <div class="caption-row">
     <span>St Mary's Abbey</span>
@@ -733,8 +733,8 @@
   </div>
 
   <!-- Offset right: Rothschild garden -->
-  <div class="layout-offset right">
-    <img src="R0002316.jpg" alt="Villa Ephrussi de Rothschild — garden" loading="lazy" onclick="openLb(this)" style="cursor:zoom-in">
+  <div class="layout-offset right" onclick="openLb(this)" style="cursor:zoom-in">
+    <img src="R0002316.jpg" alt="Villa Ephrussi de Rothschild — garden" loading="lazy">
   </div>
   <div class="caption-row">
     <span>Villa Ephrussi de Rothschild — garden</span>
@@ -809,8 +809,9 @@
   </div>
 
   <!-- Offset: Parker striped umbrellas -->
-  <div class="layout-offset right">
-    <img src="C67F8144-D708-44DB-A301-1706C0114EB8.jpg" alt="The Parker — striped umbrellas" loading="lazy" onclick="openLb(this)" style="cursor:zoom-in;touch-action:pinch-zoom">
+  <div class="layout-offset right" onclick="openLb(this)" style="cursor:zoom-in">
+    <img src="C67F8144-D708-44DB-A301-1706C0114EB8.jpg" alt="The Parker — striped umbrellas" loading="lazy">
+  </div>
   </div>
   <div class="caption-row">
     <span>The Parker</span>
@@ -846,9 +847,9 @@
   <div class="clients">
     <h3>Commercial &amp;<br>editorial work<br><br>Fora Travel<br>New York City<br><br>In association with<br>Rocco Forte Hotels</h3>
     <div class="clients-photos">
-      <img src="9O6A0670.jpg" alt="Fora Travel — red Porsche" loading="lazy" onclick="openLb(this)" style="cursor:zoom-in;touch-action:pinch-zoom">
-      <img src="fora staff-2.jpg" alt="Rocco Forte x Fora" loading="lazy" onclick="openLb(this)" style="cursor:zoom-in;touch-action:pinch-zoom">
-      <img src="9O6A0691.jpg" alt="Fora — Book that trip" loading="lazy" onclick="openLb(this)" style="cursor:zoom-in;touch-action:pinch-zoom">
+      <img src="9O6A0670.jpg" alt="Fora Travel — red Porsche" loading="lazy" onclick="openLb(this)" style="cursor:zoom-in">
+      <img src="fora staff-2.jpg" alt="Rocco Forte x Fora" loading="lazy" onclick="openLb(this)" style="cursor:zoom-in">
+      <img src="9O6A0691.jpg" alt="Fora — Book that trip" loading="lazy" onclick="openLb(this)" style="cursor:zoom-in">
     </div>
   </div>
 
@@ -862,7 +863,7 @@
   <!-- LIGHTBOX -->
   <div class="lb" id="lb" onclick="closeLb()">
     <button class="lb-close" onclick="closeLb()">Close ✕</button>
-    <img id="lb-img" src="" alt="">
+    <img id="lb-img" src="" alt="" style="touch-action:pinch-zoom">
     <div class="lb-caption" id="lb-cap"></div>
   </div>
 
