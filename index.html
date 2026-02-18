@@ -530,6 +530,23 @@
 
     .lb-close:hover { color: rgba(242,237,230,1); }
 
+    .lb-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 24px;
+      color: rgba(242,237,230,0.4);
+      cursor: pointer;
+      padding: 20px;
+      transition: color 0.2s;
+      z-index: 10;
+      user-select: none;
+    }
+
+    .lb-nav:hover { color: rgba(242,237,230,0.9); }
+    .lb-nav-prev { left: 20px; }
+    .lb-nav-next { right: 20px; }
+
     .lb-caption {
       position: absolute;
       bottom: 28px;
@@ -847,9 +864,15 @@
   <div class="clients">
     <h3>Commercial &amp;<br>editorial work<br><br>Fora Travel<br>New York City<br><br>In association with<br>Rocco Forte Hotels</h3>
     <div class="clients-photos">
-      <img src="9O6A0670.jpg" alt="Fora Travel — red Porsche" loading="lazy" onclick="openLb(this)" style="cursor:zoom-in">
-      <img src="fora staff-2.jpg" alt="Rocco Forte x Fora" loading="lazy" onclick="openLb(this)" style="cursor:zoom-in">
-      <img src="9O6A0691.jpg" alt="Fora — Book that trip" loading="lazy" onclick="openLb(this)" style="cursor:zoom-in">
+      <div onclick="openLb(this)" style="cursor:zoom-in;grid-column:1/-1">
+        <img src="9O6A0670.jpg" alt="Fora Travel — red Porsche" loading="lazy" style="width:100%;aspect-ratio:16/7;object-fit:cover;display:block">
+      </div>
+      <div onclick="openLb(this)" style="cursor:zoom-in">
+        <img src="fora staff-2.jpg" alt="Rocco Forte x Fora" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block">
+      </div>
+      <div onclick="openLb(this)" style="cursor:zoom-in">
+        <img src="9O6A0691.jpg" alt="Fora — Book that trip" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block">
+      </div>
     </div>
   </div>
 
@@ -861,21 +884,44 @@
   </footer>
 
   <!-- LIGHTBOX -->
-  <div class="lb" id="lb" onclick="closeLb()">
-    <button class="lb-close" onclick="closeLb()">Close ✕</button>
+  <div class="lb" id="lb">
+    <button class="lb-close" id="lb-close">Close ✕</button>
+    <div class="lb-nav lb-nav-prev" id="lb-prev">&#8592;</div>
+    <div class="lb-nav lb-nav-next" id="lb-next">&#8594;</div>
     <img id="lb-img" src="" alt="" style="touch-action:pinch-zoom">
     <div class="lb-caption" id="lb-cap"></div>
   </div>
 
   <script>
+    // Build photo registry from all clickable elements
+    let photos = [];
+    let currentIndex = 0;
+
+    function buildRegistry() {
+      photos = [];
+      document.querySelectorAll('[onclick*="openLb"]').forEach(el => {
+        const img = el.tagName === 'IMG' ? el : el.querySelector('img');
+        if (img) photos.push({ src: img.src, alt: img.alt });
+      });
+    }
+
     function openLb(el) {
-      const img = el.querySelector ? el.querySelector('img') : el;
-      const src = img.src;
-      const alt = img.alt;
-      document.getElementById('lb-img').src = src;
-      document.getElementById('lb-cap').textContent = alt;
+      buildRegistry();
+      const img = el.tagName === 'IMG' ? el : el.querySelector('img');
+      if (!img) return;
+      currentIndex = photos.findIndex(p => p.src === img.src);
+      if (currentIndex === -1) currentIndex = 0;
+      showPhoto(currentIndex);
       document.getElementById('lb').classList.add('open');
       document.body.style.overflow = 'hidden';
+    }
+
+    function showPhoto(index) {
+      if (index < 0) index = photos.length - 1;
+      if (index >= photos.length) index = 0;
+      currentIndex = index;
+      document.getElementById('lb-img').src = photos[currentIndex].src;
+      document.getElementById('lb-cap').textContent = photos[currentIndex].alt;
     }
 
     function closeLb() {
@@ -883,12 +929,46 @@
       document.body.style.overflow = '';
     }
 
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') closeLb();
+    function navigate(dir) {
+      showPhoto(currentIndex + dir);
+    }
+
+    // Close button
+    document.getElementById('lb-close').addEventListener('click', e => {
+      e.stopPropagation();
+      closeLb();
     });
 
-    // Stop lightbox closing when clicking the image itself
+    // Prev/next buttons
+    document.getElementById('lb-prev').addEventListener('click', e => {
+      e.stopPropagation();
+      navigate(-1);
+    });
+
+    document.getElementById('lb-next').addEventListener('click', e => {
+      e.stopPropagation();
+      navigate(1);
+    });
+
+    // Click zones on the lightbox overlay
+    document.getElementById('lb').addEventListener('click', e => {
+      const lb = document.getElementById('lb');
+      const x = e.clientX / lb.offsetWidth;
+      if (x < 0.33) navigate(-1);
+      else if (x > 0.67) navigate(1);
+      else closeLb();
+    });
+
+    // Stop click on image from bubbling to overlay
     document.getElementById('lb-img').addEventListener('click', e => e.stopPropagation());
+
+    // Keyboard
+    document.addEventListener('keydown', e => {
+      if (!document.getElementById('lb').classList.contains('open')) return;
+      if (e.key === 'Escape') closeLb();
+      if (e.key === 'ArrowLeft') navigate(-1);
+      if (e.key === 'ArrowRight') navigate(1);
+    });
   </script>
 
 </body>
