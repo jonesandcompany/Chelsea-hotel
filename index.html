@@ -119,16 +119,17 @@
 
     .section-header span {
       font-family: 'DM Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 0.2em;
+      font-size: 10px;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: var(--ink);
+      font-weight: 500;
     }
 
     .section-header em {
       font-style: italic;
-      font-size: 14px;
-      color: var(--ink);
+      font-size: 15px;
+      color: var(--muted);
     }
 
     /* ── PHOTO LAYOUTS ── */
@@ -709,6 +710,29 @@
     <span>York, England</span>
   </div>
 
+  <!-- London street: man on the day the queen died + chimneys -->
+  <div class="layout-two">
+    <div class="photo-cell" onclick="openLb(this)">
+      <img src="R0001811.jpg" alt="London — September 2022" loading="lazy">
+    </div>
+    <div class="photo-cell" onclick="openLb(this)">
+      <img src="R0001794.jpg" alt="London rooftops — September 2022" loading="lazy">
+    </div>
+  </div>
+  <div class="caption-two">
+    <span>London — September 2022</span>
+    <span>London — September 2022</span>
+  </div>
+
+  <!-- Erin at The Hoxton -->
+  <div class="layout-offset right" onclick="openLb(this)" style="cursor:zoom-in">
+    <img src="europe__2nd_pass.jpg" alt="The Hoxton, Southwark — London" loading="lazy">
+  </div>
+  <div class="caption-row">
+    <span>The Hoxton, Southwark</span>
+    <span>London, England</span>
+  </div>
+
   <!-- Full bleed: Harrods -->
   <div class="layout-full" onclick="openLb(this)">
     <img src="R0001639.jpg" alt="The Grill at Harrods, London" loading="lazy">
@@ -716,6 +740,20 @@
   <div class="caption-row">
     <span>The Grill at Harrods</span>
     <span>London</span>
+  </div>
+
+  <!-- Faculty Club + Chelsea Flower Show -->
+  <div class="layout-two">
+    <div class="photo-cell" onclick="openLb(this)">
+      <img src="fora_staff-11.jpg" alt="The Faculty Club, University of California" loading="lazy">
+    </div>
+    <div class="photo-cell" onclick="openLb(this)">
+      <img src="fora_staff-15.jpg" alt="Chelsea Flower Show — London" loading="lazy">
+    </div>
+  </div>
+  <div class="caption-two">
+    <span>The Faculty Club, University of California</span>
+    <span>Chelsea Flower Show — London</span>
   </div>
 
   <!-- TEXT BREAK -->
@@ -727,7 +765,30 @@
   <!-- SECTION: FRANCE -->
   <div class="section-header">
     <span>France</span>
-    <em>Nice &amp; Côte d'Azur</em>
+    <em>Paris, Nice &amp; Côte d'Azur</em>
+  </div>
+
+  <!-- Paris couple on banquette - full bleed -->
+  <div class="layout-full" onclick="openLb(this)">
+    <img src="europe__2nd_pass-7.jpg" alt="Paris — restaurant" loading="lazy" style="object-position:center 30%">
+  </div>
+  <div class="caption-row">
+    <span>Paris</span>
+    <span>France</span>
+  </div>
+
+  <!-- Monks island archway + Cannes cobblestones -->
+  <div class="layout-two">
+    <div class="photo-cell" onclick="openLb(this)">
+      <img src="europe__2nd_pass-13.jpg" alt="Île Saint-Honorat — monastery cloister" loading="lazy">
+    </div>
+    <div class="photo-cell" onclick="openLb(this)">
+      <img src="R0002466.jpg" alt="Île Saint-Honorat, Cannes" loading="lazy">
+    </div>
+  </div>
+  <div class="caption-two">
+    <span>Île Saint-Honorat — monastery</span>
+    <span>Île Saint-Honorat, Cannes</span>
   </div>
 
   <!-- Asym: Rothschild interior big right, Nice beach stacked left -->
@@ -761,25 +822,48 @@
   <!-- SECTION: ITALY -->
   <div class="section-header">
     <span>Italy</span>
-    <em>Florence, Milan &amp; Portofino</em>
+    <em>Florence, Sestri Levante &amp; Portofino</em>
   </div>
 
   <!-- Three column Italy -->
   <div class="layout-three">
     <div class="photo-cell" onclick="openLb(this)">
-      <img src="R0003096.jpg" alt="Florence — Baroque church" loading="lazy">
+      <img src="R0003096.jpg" alt="Florence — Baroque church facade" loading="lazy">
     </div>
     <div class="photo-cell" onclick="openLb(this)">
-      <img src="R0002919.jpg" alt="Milan — blue hearse, ancient ruins" loading="lazy">
+      <img src="R0002919.jpg" alt="Milan — blue hearse" loading="lazy">
     </div>
     <div class="photo-cell" onclick="openLb(this)">
-      <img src="R0002688.jpg" alt="Hotel Balbi, Portofino" loading="lazy">
+      <img src="R0002688.jpg" alt="Portofino" loading="lazy">
     </div>
   </div>
   <div class="caption-three">
     <span>Florence</span>
     <span>Milan</span>
-    <span>Hotel Balbi — Portofino</span>
+    <span>Portofino</span>
+  </div>
+
+  <!-- Duomo archway -->
+  <div class="layout-full" onclick="openLb(this)">
+    <img src="europe__2nd_pass-20.jpg" alt="Duomo di Firenze — rooftop" loading="lazy" style="object-position:center center">
+  </div>
+  <div class="caption-row">
+    <span>Duomo di Firenze — rooftop</span>
+    <span>Florence, Italy</span>
+  </div>
+
+  <!-- Villa Balbi key + bench with swimsuit -->
+  <div class="layout-two">
+    <div class="photo-cell" onclick="openLb(this)">
+      <img src="europe__2nd_pass-18.jpg" alt="Villa Balbi — room 425, Sestri Levante" loading="lazy">
+    </div>
+    <div class="photo-cell" onclick="openLb(this)">
+      <img src="europe__2nd_pass-17.jpg" alt="Villa Balbi — garden, Sestri Levante" loading="lazy">
+    </div>
+  </div>
+  <div class="caption-two">
+    <span>Villa Balbi — Room 425</span>
+    <span>Villa Balbi — Sestri Levante</span>
   </div>
 
   <!-- Inset wide: Tuscan hills -->
@@ -794,7 +878,7 @@
   <!-- SECTION: CALIFORNIA -->
   <div class="section-header">
     <span>California</span>
-    <em>Palm Springs</em>
+    <em>Palm Springs &amp; Rancho Mirage</em>
   </div>
 
   <!-- Full bleed: Sunnylands grounds -->
@@ -806,17 +890,40 @@
     <span>Rancho Mirage, California</span>
   </div>
 
-  <!-- Asym: Sunnylands pergola big left, Parker fire pit + umbrellas stacked right -->
+  <!-- Parker gate + woman on sofa -->
+  <div class="layout-two">
+    <div class="photo-cell" onclick="openLb(this)">
+      <img src="parker-5.jpg" alt="The Parker Palm Springs — garden gate" loading="lazy">
+    </div>
+    <div class="photo-cell" onclick="openLb(this)">
+      <img src="parker.jpg" alt="The Parker Palm Springs — terrace" loading="lazy">
+    </div>
+  </div>
+  <div class="caption-two">
+    <span>The Parker — garden</span>
+    <span>The Parker — Palm Springs</span>
+  </div>
+
+  <!-- Parker dusk pool full bleed -->
+  <div class="layout-full" onclick="openLb(this)">
+    <img src="parker-6.jpg" alt="The Parker Palm Springs — pool at dusk" loading="lazy" style="object-position:center center">
+  </div>
+  <div class="caption-row">
+    <span>The Parker — pool at dusk</span>
+    <span>Palm Springs, California</span>
+  </div>
+
+  <!-- Asym: Sunnylands pergola big left, Parker pool + umbrellas stacked right -->
   <div class="layout-asymL">
     <div class="big" onclick="openLb(this)">
       <img src="R005158.jpg" alt="Sunnylands — pergola shadows" loading="lazy">
     </div>
     <div class="stack">
       <div class="photo-cell" onclick="openLb(this)">
-        <img src="R005146.jpg" alt="The Parker — fire pit gathering" loading="lazy">
+        <img src="parker-1.jpg" alt="The Parker — pool" loading="lazy">
       </div>
       <div class="photo-cell" onclick="openLb(this)">
-        <img src="R005147.jpg" alt="The Parker — pool umbrellas" loading="lazy">
+        <img src="parker-4.jpg" alt="The Parker — cabana umbrellas" loading="lazy">
       </div>
     </div>
   </div>
@@ -825,34 +932,66 @@
     <span>The Parker — Palm Springs</span>
   </div>
 
-  <!-- Offset: Parker striped umbrellas -->
+  <!-- Offset: Parker hedge archway -->
   <div class="layout-offset right" onclick="openLb(this)" style="cursor:zoom-in">
-    <img src="C67F8144-D708-44DB-A301-1706C0114EB8.jpg" alt="The Parker — striped umbrellas" loading="lazy">
-  </div>
+    <img src="parker-3.jpg" alt="The Parker Palm Springs — hedge archway" loading="lazy">
   </div>
   <div class="caption-row">
     <span>The Parker</span>
     <span>Palm Springs, California</span>
   </div>
 
-  <!-- SECTION: NEW YORK -->
+  <!-- SECTION: MEXICO -->
   <div class="section-header">
-    <span>New York</span>
-    <em>NYC</em>
+    <span>Mexico</span>
+    <em>The Viceroy</em>
   </div>
 
-  <!-- Two col NYC -->
+  <!-- Full bleed: silhouettes against orange wall -->
+  <div class="layout-full" onclick="openLb(this)">
+    <img src="fora_staff-19.jpg" alt="Viceroy — evening, Mexico" loading="lazy" style="object-position:center center">
+  </div>
+  <div class="caption-row">
+    <span>Viceroy</span>
+    <span>Mexico</span>
+  </div>
+
+  <!-- Pink pool + blurry swimmer -->
   <div class="layout-two">
     <div class="photo-cell" onclick="openLb(this)">
-      <img src="R003591.jpg?v=2" alt="NYC — Chesterfield lounge" loading="lazy">
+      <img src="fora_staff-18.jpg" alt="Viceroy — pool at night, Mexico" loading="lazy">
     </div>
     <div class="photo-cell" onclick="openLb(this)">
-      <img src="R006107.jpg?v=2" alt="NYC — green door, martinis" loading="lazy">
+      <img src="fora_staff-17.jpg" alt="Viceroy — pool, Mexico" loading="lazy">
     </div>
   </div>
   <div class="caption-two">
+    <span>Viceroy — pool at night</span>
+    <span>Viceroy — Mexico</span>
+  </div>
+
+  <!-- SECTION: NEW YORK -->
+  <div class="section-header">
+    <span>New York</span>
+    <em>Manhattan</em>
+  </div>
+
+  <!-- Three col NYC -->
+  <div class="layout-three">
+    <div class="photo-cell" onclick="openLb(this)">
+      <img src="fora_staff-12.jpg" alt="Café Dante, West Village — New York" loading="lazy">
+    </div>
+    <div class="photo-cell" onclick="openLb(this)">
+      <img src="R003591.jpg?v=2" alt="Midtown — New York" loading="lazy">
+    </div>
+    <div class="photo-cell" onclick="openLb(this)">
+      <img src="R006107.jpg?v=2" alt="Bemelmans Bar, The Carlyle — New York" loading="lazy">
+    </div>
+  </div>
+  <div class="caption-three">
+    <span>Café Dante — West Village</span>
     <span>New York City</span>
-    <span>New York City</span>
+    <span>Bemelmans Bar — The Carlyle</span>
   </div>
 
   <!-- SECTION: COMMISSIONS -->
@@ -880,7 +1019,7 @@
   <footer>
     <div class="f-left">© W. A. Jones — All rights reserved</div>
     <div class="f-center">W. A. Jones</div>
-    <div class="f-right">Inquiries: <a href="mailto:hello@wajones.co">hello@wajones.co</a></div>
+    <div class="f-right">Inquiries: <a href="/cdn-cgi/l/email-protection#9ff7faf3f3f0dfe8fef5f0f1faecb1fcf0"><span class="__cf_email__" data-cfemail="3f575a5353507f485e5550515a4c115c50">[email&#160;protected]</span></a></div>
   </footer>
 
   <!-- LIGHTBOX -->
@@ -892,7 +1031,7 @@
     <div class="lb-caption" id="lb-cap"></div>
   </div>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     let photos = [];
     let currentIndex = 0;
     let touchStartX = 0;
@@ -983,12 +1122,4 @@
 
     // Keyboard
     document.addEventListener('keydown', e => {
-      if (!document.getElementById('lb').classList.contains('open')) return;
-      if (e.key === 'Escape') closeLb();
-      if (e.key === 'ArrowLeft') navigate(-1);
-      if (e.key === 'ArrowRight') navigate(1);
-    });
-  </script>
-
-</body>
-</html>
+      if (!d
