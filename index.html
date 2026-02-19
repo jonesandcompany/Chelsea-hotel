@@ -809,14 +809,14 @@
   <!-- Asym: Sunnylands pergola big left, Parker fire pit + umbrellas stacked right -->
   <div class="layout-asymL">
     <div class="big" onclick="openLb(this)">
-      <img src="R005158.jpg" alt="Sunnylands — pergola shadows" loading="lazy">
+      <img src="_R005158.jpg" alt="Sunnylands — pergola shadows" loading="lazy">
     </div>
     <div class="stack">
       <div class="photo-cell" onclick="openLb(this)">
-        <img src="R005146.jpg" alt="The Parker — fire pit gathering" loading="lazy">
+        <img src="_R005146.jpg" alt="The Parker — fire pit gathering" loading="lazy">
       </div>
       <div class="photo-cell" onclick="openLb(this)">
-        <img src="R005147.jpg" alt="The Parker — pool umbrellas" loading="lazy">
+        <img src="_R005147.jpg" alt="The Parker — pool umbrellas" loading="lazy">
       </div>
     </div>
   </div>
@@ -844,10 +844,10 @@
   <!-- Two col NYC -->
   <div class="layout-two">
     <div class="photo-cell" onclick="openLb(this)">
-      <img src="R003591.jpg?v=2" alt="NYC — Chesterfield lounge" loading="lazy">
+      <img src="_R003591.jpg?v=2" alt="NYC — Chesterfield lounge" loading="lazy">
     </div>
     <div class="photo-cell" onclick="openLb(this)">
-      <img src="R006107.jpg?v=2" alt="NYC — green door, martinis" loading="lazy">
+      <img src="_R006107.jpg?v=2" alt="NYC — green door, martinis" loading="lazy">
     </div>
   </div>
   <div class="caption-two">
@@ -893,9 +893,10 @@
   </div>
 
   <script>
-    // Build photo registry from all clickable elements
     let photos = [];
     let currentIndex = 0;
+    let touchStartX = 0;
+    let touchStartY = 0;
 
     function buildRegistry() {
       photos = [];
@@ -939,7 +940,7 @@
       closeLb();
     });
 
-    // Prev/next buttons
+    // Prev/next arrow buttons
     document.getElementById('lb-prev').addEventListener('click', e => {
       e.stopPropagation();
       navigate(-1);
@@ -950,17 +951,35 @@
       navigate(1);
     });
 
-    // Click zones on the lightbox overlay
-    document.getElementById('lb').addEventListener('click', e => {
-      const lb = document.getElementById('lb');
-      const x = e.clientX / lb.offsetWidth;
+    // Click zones — left third back, right third forward, center closes
+    document.getElementById('lb-img').addEventListener('click', e => {
+      e.stopPropagation();
+      const x = e.offsetX / e.target.offsetWidth;
       if (x < 0.33) navigate(-1);
       else if (x > 0.67) navigate(1);
       else closeLb();
     });
 
-    // Stop click on image from bubbling to overlay
-    document.getElementById('lb-img').addEventListener('click', e => e.stopPropagation());
+    // Click on overlay background (outside image) also closes
+    document.getElementById('lb').addEventListener('click', e => {
+      if (e.target === document.getElementById('lb')) closeLb();
+    });
+
+    // Swipe gestures
+    document.getElementById('lb').addEventListener('touchstart', e => {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    document.getElementById('lb').addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      const dy = e.changedTouches[0].clientY - touchStartY;
+      // Only trigger if horizontal swipe dominates
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+        if (dx < 0) navigate(1);
+        else navigate(-1);
+      }
+    }, { passive: true });
 
     // Keyboard
     document.addEventListener('keydown', e => {
