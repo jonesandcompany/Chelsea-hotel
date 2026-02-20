@@ -14,13 +14,15 @@
     --ink: #1a1814;
     --rust: #8b4a2b;
     --muted: #8a8278;
-    --england-bg: #d6dce3;
-    --france-bg: #ede8e0;
-    --italy-bg: #e8e0d5;
-    --california-bg: #e8dfc8;
-    --mexico-bg: #1e1a14;
+    --england-bg: #c8d4c0;   /* sage green — Belstaff cast */
+    --france-bg: #ddd8d0;    /* warm grey-lavender — Haussmann stone */
+    --italy-bg: #d9c9b4;     /* warm terracotta-adjacent */
+    --california-bg: #e6d9a8; /* golden desert sand */
+    --mexico-bg: #160f0a;    /* near-black with brown warmth */
     --mexico-text: #e8d9c0;
-    --ny-bg: #f2ede6;
+    --ny-bg: #e8e4de;        /* cooler paper — concrete/asphalt register */
+    --fora-bg: #2a0d08;      /* deep red-black for commissions */
+    --fora-text: #f0ddd0;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -33,10 +35,10 @@
     width: 100%; height: 100%;
     pointer-events: none;
     z-index: 9999;
-    opacity: 0.035;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-    background-size: 200px 200px;
-    mix-blend-mode: multiply;
+    opacity: 0.12;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 150px 150px;
+    mix-blend-mode: overlay;
   }
 
   html { scroll-behavior: smooth; }
@@ -189,10 +191,30 @@
     background-color: var(--ny-bg);
   }
 
-  /* COMMISSIONS */
+  /* COMMISSIONS — deep red, Fora brand color pulled from the Porsche */
   #commissions {
-    background-color: var(--paper);
-    border-top: 1px solid rgba(26,24,20,0.08);
+    background-color: var(--fora-bg);
+    color: var(--fora-text);
+  }
+
+  #commissions .commission-header {
+    color: rgba(240,221,208,0.45);
+  }
+
+  #commissions .commission-title {
+    color: var(--fora-text);
+  }
+
+  #commissions .commission-sub {
+    color: rgba(240,221,208,0.5);
+  }
+
+  #commissions .photo-caption {
+    color: rgba(240,221,208,0.4);
+  }
+
+  #commissions .section-header {
+    border-color: var(--fora-text);
   }
 
   .section-header {
@@ -279,19 +301,19 @@
 
   /* PULL QUOTE */
   .pull-quote {
-    max-width: 600px;
-    margin: 64px auto;
+    max-width: 800px;
+    margin: 80px auto;
     padding: 0 32px;
     text-align: center;
   }
 
   .pull-quote p {
     font-family: 'EB Garamond', serif;
-    font-size: clamp(20px, 3vw, 28px);
+    font-size: clamp(28px, 4.5vw, 52px);
     font-style: italic;
-    line-height: 1.4;
+    line-height: 1.3;
     color: var(--ink);
-    opacity: 0.7;
+    opacity: 0.75;
   }
 
   /* ABOUT STRIP */
@@ -392,17 +414,28 @@
 
   .lb-close {
     position: absolute;
-    top: 24px; right: 32px;
+    top: 0; right: 0;
+    padding: 28px 36px;
     font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    color: rgba(242,237,230,0.5);
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    color: rgba(242,237,230,0.6);
     cursor: pointer;
     text-transform: uppercase;
-    transition: color 0.2s;
+    transition: color 0.2s, background 0.2s;
+    z-index: 10;
+    min-width: 80px;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.05);
   }
 
-  .lb-close:hover { color: var(--paper); }
+  .lb-close:hover {
+    color: var(--paper);
+    background: rgba(255,255,255,0.1);
+  }
 
   .lb-nav {
     position: absolute;
@@ -540,9 +573,14 @@
   <p class="photo-caption">The Faculty Club, University of California &nbsp;·&nbsp; Chelsea Flower Show</p>
 </section>
 
-<!-- ABOUT STRIP -->
-<div class="about-strip" style="padding: 64px 32px; background: var(--paper);">
-  <p>W. A. Jones photographs the spaces that define how we experience a place — lobbies, gardens, dining rooms, terraces at dusk. Available for editorial commissions, hotel partnerships, and private clients worldwide.</p>
+<!-- ABOUT / PULL QUOTE -->
+<div style="background: var(--paper); padding: 80px 32px;">
+  <div class="pull-quote">
+    <p>"The light in a room tells you everything about the people who chose it."</p>
+  </div>
+  <div class="about-strip" style="max-width:640px; margin: 0 auto;">
+    <p>W. A. Jones photographs the spaces that define how we experience a place — lobbies, gardens, dining rooms, terraces at dusk. Available for editorial commissions, hotel partnerships, and private clients worldwide.</p>
+  </div>
 </div>
 
 <!-- FRANCE -->
