@@ -6,7 +6,484 @@
 <title>W. A. Jones — For BAA</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --white: #ffffff;
+    --black: #000000;
+    --mid: #6b6b6b;
+    --light: #d4d4d4;
+    --bg: #ffffff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--black);
+    -webkit-font-smoothing: antialiased;
+    font-size: 13px;
+    font-weight: 300;
+  }
+
+  /* NAV — matching BAA exactly: centered logo, minimal */
+  nav {
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  .nav-left {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--black);
+  }
+
+  .nav-right {
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+
+  /* STATEMENT */
+  .statement {
+    padding: 64px 24px 56px;
+    max-width: 700px;
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  .statement h1 {
+    font-size: clamp(24px, 3.5vw, 42px);
+    font-weight: 300;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    color: var(--black);
+    margin-bottom: 28px;
+  }
+
+  .statement h1 em {
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  .statement p {
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.9;
+    color: var(--mid);
+    max-width: 480px;
+  }
+
+  .statement p + p { margin-top: 12px; }
+
+  /* SECTION LABEL — matches BAA's category headers */
+  .section-label {
+    padding: 20px 24px 16px;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--light);
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  /* PHOTO GRID */
+  .grid-section {
+    padding: 0;
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  .row {
+    display: grid;
+    gap: 1px;
+    background: #e5e5e5;
+  }
+
+  .row-2 { grid-template-columns: 1fr 1fr; }
+  .row-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .row-hero { grid-template-columns: 2fr 1fr; }
+  .row-hero-r { grid-template-columns: 1fr 2fr; }
+
+  .row + .row { margin-top: 1px; }
+
+  .photo {
+    overflow: hidden;
+    cursor: pointer;
+    background: #f5f5f5;
+    position: relative;
+  }
+
+  .photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+
+  .photo:hover img { transform: scale(1.015); }
+
+  .photo.r-4-5 img { aspect-ratio: 4/5; }
+  .photo.r-3-4 img { aspect-ratio: 3/4; }
+  .photo.r-4-3 img { aspect-ratio: 4/3; }
+  .photo.r-1-1 img { aspect-ratio: 1/1; }
+
+  .stacked {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: #e5e5e5;
+  }
+
+  /* BRIEF SECTION — BAA uses black sections sparingly */
+  .brief-section {
+    background: var(--black);
+    color: var(--white);
+    padding: 56px 24px;
+    border-bottom: 1px solid #222;
+  }
+
+  .brief-section .section-label {
+    padding: 0 0 32px 0;
+    border: none;
+    color: #444;
+  }
+
+  .brief-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px 64px;
+    max-width: 800px;
+  }
+
+  .brief-item .q {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #555;
+    margin-bottom: 10px;
+  }
+
+  .brief-item .a {
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.8;
+    color: #aaaaaa;
+  }
+
+  /* CLOSING */
+  .closing {
+    padding: 64px 24px;
+    border-bottom: 1px solid #e5e5e5;
+    max-width: 600px;
+  }
+
+  .closing p {
+    font-size: clamp(16px, 2vw, 22px);
+    font-weight: 300;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    color: var(--black);
+    margin-bottom: 40px;
+  }
+
+  .closing-contact {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mid);
+    line-height: 2;
+  }
+
+  .closing-contact a {
+    color: var(--black);
+    text-decoration: none;
+    border-bottom: 1px solid #000;
+    padding-bottom: 1px;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer span {
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--light);
+  }
+
+  /* LIGHTBOX */
+  #lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.97);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #lightbox.active { display: flex; }
+
+  #lightbox img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+  }
+
+  .lb-close {
+    position: absolute;
+    top: 0; right: 0;
+    width: 80px; height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.35);
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .lb-close:hover { color: white; }
+
+  .lb-nav {
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 40%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+
+  .lb-prev { left: 0; padding-left: 24px; }
+  .lb-next { right: 0; justify-content: flex-end; padding-right: 24px; }
+
+  .lb-arrow {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.2);
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .lb-nav:hover .lb-arrow { color: rgba(255,255,255,0.6); }
+
+  @media (max-width: 768px) {
+    .row-hero, .row-hero-r, .row-3 { grid-template-columns: 1fr 1fr; }
+    .brief-grid { grid-template-columns: 1fr; gap: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-left">W. A. Jones</span>
+  <span class="nav-right">For BAA — Feb 2026</span>
+</nav>
+
+<!-- STATEMENT -->
+<div class="statement">
+  <h1>This isn't <em>exactly</em> what's<br>in your brief.<br>But it's close. And it's real.</h1>
+  <p>This work already exists. It's what comes naturally — candid, observational, people moving through the world without knowing or caring they're being photographed.</p>
+  <p>Nobody ever asks for this. They should.</p>
+</div>
+
+<!-- SECTION 1 -->
+<div class="grid-section">
+  <div class="section-label">Moving through the city</div>
+
+  <div class="row row-hero">
+    <div class="photo r-4-5" data-src="theuntitledmag-2.jpg">
+      <img src="theuntitledmag-2.jpg" alt="" loading="eager">
+    </div>
+    <div class="stacked">
+      <div class="photo r-4-5" data-src="theuntitledmag-6.jpg">
+        <img src="theuntitledmag-6.jpg" alt="" loading="eager">
+      </div>
+      <div class="photo r-4-5" data-src="lealfre-4.jpg">
+        <img src="lealfre-4.jpg" alt="" loading="lazy">
+      </div>
+    </div>
+  </div>
+
+  <div class="row row-3">
+    <div class="photo r-4-5" data-src="theuntitledmag-4.jpg">
+      <img src="theuntitledmag-4.jpg" alt="" loading="lazy">
+    </div>
+    <div class="photo r-4-5" data-src="theuntitledmag.jpg">
+      <img src="theuntitledmag.jpg" alt="" loading="lazy">
+    </div>
+    <div class="photo r-4-5" data-src="lealfre-20.jpg">
+      <img src="lealfre-20.jpg" alt="" loading="lazy">
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 2 -->
+<div class="grid-section">
+  <div class="section-label">Transit — environmental context</div>
+
+  <div class="row row-hero-r">
+    <div class="photo r-4-3" data-src="lealfre-10.jpg">
+      <img src="lealfre-10.jpg" alt="" loading="lazy">
+    </div>
+    <div class="photo r-4-3" data-src="lealfre-42.jpg">
+      <img src="lealfre-42.jpg" alt="" loading="lazy">
+    </div>
+  </div>
+
+  <div class="row row-2">
+    <div class="photo r-4-5" data-src="homepage-65.jpg">
+      <img src="homepage-65.jpg" alt="" loading="lazy">
+    </div>
+    <div class="photo r-4-5" data-src="homepage-66.jpg">
+      <img src="homepage-66.jpg" alt="" loading="lazy">
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 3 -->
+<div class="grid-section">
+  <div class="section-label">Unguarded moments</div>
+
+  <div class="row row-3">
+    <div class="photo r-4-5" data-src="lealfre-8.jpg">
+      <img src="lealfre-8.jpg" alt="" loading="lazy">
+    </div>
+    <div class="photo r-4-5" data-src="lealfre-19.jpg">
+      <img src="lealfre-19.jpg" alt="" loading="lazy">
+    </div>
+    <div class="photo r-4-5" data-src="lealfre-31.jpg">
+      <img src="lealfre-31.jpg" alt="" loading="lazy">
+    </div>
+  </div>
+
+  <div class="row row-2">
+    <div class="photo r-4-3" data-src="lealfre-50.jpg">
+      <img src="lealfre-50.jpg" alt="" loading="lazy">
+    </div>
+    <div class="photo r-4-3" data-src="lealfre-13.jpg">
+      <img src="lealfre-13.jpg" alt="" loading="lazy">
+    </div>
+  </div>
+</div>
+
+<!-- BRIEF -->
+<div class="brief-section">
+  <div class="section-label">On the brief</div>
+  <div class="brief-grid">
+    <div class="brief-item">
+      <div class="q">What matches</div>
+      <div class="a">Candid posture. No acknowledgment of camera. Environmental context. Motion and presence. Imperfection. The feeling of being somewhere, not performing somewhere.</div>
+    </div>
+    <div class="brief-item">
+      <div class="q">What's honest</div>
+      <div class="a">These are existing shots — not BAA product. The dedicated shoot delivers the brief as written: airports, hotel entrances, walking sequences, transition moments. This is the sensibility that shoot comes from.</div>
+    </div>
+    <div class="brief-item">
+      <div class="q">The approach</div>
+      <div class="a">Small camera. No assistant. No lighting. The grain and pulled blacks are intentional — not a filter applied after, a decision made before.</div>
+    </div>
+    <div class="brief-item">
+      <div class="q">Why this matters for BAA</div>
+      <div class="a">Agency paparazzi shots look like agency paparazzi shots. This looks like someone actually saw something worth photographing. That's a different conversation for your brand.</div>
+    </div>
+  </div>
+</div>
+
+<!-- CLOSING -->
+<div class="closing">
+  <p>Ready to shoot the brief properly. Let's talk about what that looks like.</p>
+  <div class="closing-contact">
+    W. A. Jones &nbsp;·&nbsp; New York City<br>
+    <a href="mailto:alex@wajonesphotography.com">alex@wajonesphotography.com</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span>W. A. Jones</span>
+  <span>© 2026</span>
+</footer>
+
+<!-- LIGHTBOX -->
+<div id="lightbox">
+  <div class="lb-close" onclick="closeLightbox()">Close ✕</div>
+  <div class="lb-nav lb-prev" onclick="lbNav(-1)">
+    <span class="lb-arrow">← Prev</span>
+  </div>
+  <img id="lb-img" src="" alt="">
+  <div class="lb-nav lb-next" onclick="lbNav(1)">
+    <span class="lb-arrow">Next →</span>
+  </div>
+</div>
+
+<script>
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lb-img');
+  const blocks = Array.from(document.querySelectorAll('.photo'));
+  let currentIdx = 0;
+
+  blocks.forEach((block, i) => {
+    block.addEventListener('click', () => {
+      currentIdx = i;
+      lbImg.src = block.dataset.src;
+      lb.classList.add('active');
+    });
+  });
+
+  function closeLightbox() {
+    lb.classList.remove('active');
+    lbImg.src = '';
+  }
+
+  function lbNav(dir) {
+    currentIdx = (currentIdx + dir + blocks.length) % blocks.length;
+    lbImg.src = blocks[currentIdx].dataset.src;
+  }
+
+  lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('active')) return;
+    if (e.key === 'ArrowRight') lbNav(1);
+    if (e.key === 'ArrowLeft') lbNav(-1);
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  let touchStartX = 0;
+  lb.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+  lb.addEventListener('touchend', e => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) lbNav(diff > 0 ? 1 : -1);
+  });
+</script>
+
+</body>
+</html>
 
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -410,8 +887,8 @@
     <div class="photo r-4-3" data-src="lealfre-50.jpg">
       <img src="lealfre-50.jpg" alt="" loading="lazy">
     </div>
-    <div class="photo r-4-3" data-src="foratravel-18.jpg">
-      <img src="foratravel-18.jpg" alt="" loading="lazy">
+    <div class="photo r-4-3" data-src="lealfre-13.jpg">
+      <img src="lealfre-13.jpg" alt="" loading="lazy">
     </div>
   </div>
 </div>
@@ -429,8 +906,8 @@
       <div class="a">These are existing shots — not BAA product. The dedicated shoot delivers the brief as written: airports, hotel entrances, walking sequences, transition moments. This is the sensibility that shoot comes from.</div>
     </div>
     <div class="brief-item">
-      <div class="q">The camera</div>
-      <div class="a">Ricoh GR3x. 40mm equivalent, APS-C. Small enough to disappear. Fast enough to catch it. The grain and pulled blacks are the camera — not post-production.</div>
+      <div class="q">The approach</div>
+      <div class="a">Small camera. No assistant. No lighting. The grain and pulled blacks are intentional — not a filter applied after, a decision made before.</div>
     </div>
     <div class="brief-item">
       <div class="q">Why this matters for BAA</div>
