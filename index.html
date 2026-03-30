@@ -812,7 +812,7 @@
 <section id="commissions">
   <div class="commission-header">Selected clients</div>
   <div class="commission-title">Fora Travel</div>
-  <div class="commission-sub">New York City &nbsp;·&nbsp; In association with Rocco Forte Hotels</div>
+  <div class="commission-sub">New York City &nbsp;·&nbsp; Rocco Forte Hotels</div>
 
   <div class="photo-row grid-3">
     <div class="photo-block" data-src="9O6A0670.jpg">
@@ -832,7 +832,7 @@
   <div>
     <div class="footer-name">W. A. Jones</div>
     <div class="footer-contact">
-      Inquiries: <a href="/cdn-cgi/l/email-protection#f59499908db582949f9a9b9086859d9a819a928794859d8cdb969a98"><span class="__cf_email__" data-cfemail="bedfd2dbc6fec9dfd4d1d0dbcdced6d1cad1d9ccdfced6c790ddd1d3">[email&#160;protected]</span></a>
+      Inquiries: <a href="mailto:alex@skinnybonesjones.biz">alex@skinnybonesjones.biz</a>
     </div>
   </div>
   <div class="footer-copy">© W. A. Jones — All rights reserved</div>
@@ -853,7 +853,7 @@
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   // Lightbox
   const lb = document.getElementById('lightbox');
   const lbBehind = document.getElementById('lb-behind');
@@ -943,4 +943,13 @@
     if (isMultiTouch) { isMultiTouch = false; return; }
     const dx = touchStartX - e.changedTouches[0].clientX;
     const dy = touchStartY - e.changedTouches[0].clientY;
-    const dt = Date.now() - touchStartTi
+    const dt = Date.now() - touchStartTime;
+    // Horizontal swipe: fast enough, far enough, not mostly vertical
+    if (dt < 300 && Math.abs(dx) > 30 && Math.abs(dy) < 50) {
+      lbNav(dx > 0 ? 1 : -1);
+    }
+  });
+
+</script>
+</body>
+</html>
