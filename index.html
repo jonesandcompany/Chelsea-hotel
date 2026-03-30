@@ -406,11 +406,35 @@
 
   #lightbox.active { display: flex; }
 
-  #lightbox img {
+  .lb-img-wrap {
+    position: relative;
+    width: 92vw;
+    height: 92vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .lb-img-wrap img {
+    position: absolute;
     max-width: 92vw;
     max-height: 92vh;
     object-fit: contain;
-    transition: opacity 0.2s ease;
+    transition: opacity 0.25s ease;
+  }
+
+  .lb-img-wrap img.lb-behind {
+    opacity: 1;
+    z-index: 1;
+  }
+
+  .lb-img-wrap img.lb-front {
+    opacity: 0;
+    z-index: 2;
+  }
+
+  .lb-img-wrap img.lb-front.lb-visible {
+    opacity: 1;
   }
 
   .lb-close {
@@ -479,7 +503,7 @@
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-name">W. A. Jones</a>
+  <a href="https://skinnybonesjones.biz" class="nav-name">W. A. Jones</a>
   <ul class="nav-links">
     <li><a href="#england">England</a></li>
     <li><a href="#france">France</a></li>
@@ -500,7 +524,7 @@
 <div class="credential-strip">
   <strong>Commercial work includes Fora Travel</strong>
   <div class="credential-divider"></div>
-  <span>In association with Rocco Forte Hotels</span>
+  <span>Rocco Forte Hotels</span>
   <div class="credential-divider"></div>
   <span>Editorial &nbsp;·&nbsp; Hospitality &nbsp;·&nbsp; Travel</span>
 </div>
@@ -808,7 +832,7 @@
   <div>
     <div class="footer-name">W. A. Jones</div>
     <div class="footer-contact">
-      Inquiries: <a href="mailto:alex@wajonesphotography.com">alex@wajonesphotography.com</a>
+      Inquiries: <a href="/cdn-cgi/l/email-protection#f59499908db582949f9a9b9086859d9a819a928794859d8cdb969a98"><span class="__cf_email__" data-cfemail="bedfd2dbc6fec9dfd4d1d0dbcdced6d1cad1d9ccdfced6c790ddd1d3">[email&#160;protected]</span></a>
     </div>
   </div>
   <div class="footer-copy">© W. A. Jones — All rights reserved</div>
@@ -820,41 +844,66 @@
   <div class="lb-nav lb-prev" onclick="lbNav(-1)">
     <span class="lb-arrow">← Prev</span>
   </div>
-  <img id="lb-img" src="" alt="">
+  <div class="lb-img-wrap" id="lb-wrap">
+    <img id="lb-behind" class="lb-behind" src="" alt="">
+    <img id="lb-front"  class="lb-front"  src="" alt="">
+  </div>
   <div class="lb-nav lb-next" onclick="lbNav(1)">
     <span class="lb-arrow">Next →</span>
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Lightbox
   const lb = document.getElementById('lightbox');
-  const lbImg = document.getElementById('lb-img');
+  const lbBehind = document.getElementById('lb-behind');
+  const lbFront  = document.getElementById('lb-front');
   const blocks = Array.from(document.querySelectorAll('.photo-block'));
   let currentIdx = 0;
+  let transitioning = false;
 
   blocks.forEach((block, i) => {
     block.addEventListener('click', () => {
       currentIdx = i;
-      showImage(block.dataset.src);
+      // First open: just set behind, no crossfade needed
+      lbBehind.src = block.dataset.src;
+      lbFront.src = '';
+      lbFront.classList.remove('lb-visible');
       lb.classList.add('active');
     });
   });
 
-  // Crossfade image swap
   function showImage(src) {
-    lbImg.style.opacity = '0';
+    if (transitioning) return;
+    transitioning = true;
+
     const tmp = new Image();
     tmp.onload = () => {
-      lbImg.src = src;
-      lbImg.style.opacity = '1';
+      // Load new image into front layer, then fade it in
+      lbFront.src = src;
+      lbFront.classList.remove('lb-visible');
+
+      // Force reflow so transition fires
+      lbFront.getBoundingClientRect();
+      lbFront.classList.add('lb-visible');
+
+      // Once front is fully visible, promote it to behind and reset front
+      setTimeout(() => {
+        lbBehind.src = src;
+        lbFront.classList.remove('lb-visible');
+        lbFront.src = '';
+        transitioning = false;
+      }, 280);
     };
     tmp.src = src;
   }
 
   function closeLightbox() {
     lb.classList.remove('active');
-    lbImg.src = '';
+    lbBehind.src = '';
+    lbFront.src = '';
+    lbFront.classList.remove('lb-visible');
+    transitioning = false;
   }
 
   function lbNav(dir) {
@@ -894,13 +943,4 @@
     if (isMultiTouch) { isMultiTouch = false; return; }
     const dx = touchStartX - e.changedTouches[0].clientX;
     const dy = touchStartY - e.changedTouches[0].clientY;
-    const dt = Date.now() - touchStartTime;
-    if (Math.abs(dx) < Math.abs(dy)) return;
-    const isFastSwipe = Math.abs(dx) > 60 && dt < 250;
-    const isLongSwipe = Math.abs(dx) > 90;
-    if (isFastSwipe || isLongSwipe) lbNav(dx > 0 ? 1 : -1);
-  }, { passive: true });
-</script>
-
-</body>
-</html>
+    const dt = Date.now() - touchStartTi
