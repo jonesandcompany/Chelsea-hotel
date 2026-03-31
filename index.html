@@ -588,7 +588,7 @@
   <div style="height:40px"></div>
 
   <div class="photo-row grid-2">
-    <div class="photo-block" data-src="forastaff11.jpg">
+    <div class="photo-block portrait" data-src="forastaff11.jpg">
       <img src="forastaff11.jpg" alt="The Faculty Club, University of California" loading="lazy">
     </div>
     <div class="photo-block" data-src="forastaff15.jpg">
@@ -690,7 +690,7 @@
         <img src="europe2ndpass18.jpg" alt="Villa Balbi — room 425" loading="lazy">
       </div>
       <div class="photo-block" data-src="europe2ndpass17.jpg">
-        <img src="europe2ndpass17.jpg" alt="Villa Balbi — garden" loading="lazy">
+        <img src="europe2ndpass17.jpg" alt="Villa Balbi — garden" loading="lazy" style="object-position: center bottom;">
       </div>
     </div>
   </div>
@@ -832,7 +832,7 @@
   <div>
     <div class="footer-name">W. A. Jones</div>
     <div class="footer-contact">
-      Inquiries: <a href="mailto:alex@skinnybonesjones.biz">alex@skinnybonesjones.biz</a>
+      <a href="/cdn-cgi/l/email-protection#b0d1dcd5c8f0c3dbd9dedec9d2dfded5c3dadfded5c39ed2d9ca"><span class="__cf_email__" data-cfemail="d7b6bbb2af97a4bcbeb9b9aeb5b8b9b2a4bdb8b9b2a4f9b5bead">[email&#160;protected]</span></a>
     </div>
   </div>
   <div class="footer-copy">© W. A. Jones — All rights reserved</div>
@@ -853,7 +853,7 @@
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Lightbox
   const lb = document.getElementById('lightbox');
   const lbBehind = document.getElementById('lb-behind');
@@ -936,20 +936,4 @@
   }, { passive: true });
 
   lb.addEventListener('touchmove', e => {
-    if (e.touches.length > 1) isMultiTouch = true;
-  }, { passive: true });
-
-  lb.addEventListener('touchend', e => {
-    if (isMultiTouch) { isMultiTouch = false; return; }
-    const dx = touchStartX - e.changedTouches[0].clientX;
-    const dy = touchStartY - e.changedTouches[0].clientY;
-    const dt = Date.now() - touchStartTime;
-    // Horizontal swipe: fast enough, far enough, not mostly vertical
-    if (dt < 300 && Math.abs(dx) > 30 && Math.abs(dy) < 50) {
-      lbNav(dx > 0 ? 1 : -1);
-    }
-  });
-
-</script>
-</body>
-</html>
+    if (e.touches.length
