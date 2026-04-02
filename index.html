@@ -277,6 +277,15 @@
   .photo-block.wide img { aspect-ratio: 16/9; }
   .photo-block.square img { aspect-ratio: 1/1; }
 
+  .photo-block.native { overflow: hidden; }
+  .photo-block.native img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: unset;
+    object-fit: unset;
+    display: block;
+  }
+
   .photo-block:hover img { transform: scale(1.02); }
 
   .photo-caption {
@@ -613,8 +622,8 @@
   </div>
 
   <div class="photo-row">
-    <div class="photo-block" style="aspect-ratio: auto;" data-src="forte-1.jpg">
-      <img src="forte-1.jpg" alt="France" loading="lazy" style="width:100%; height:auto; object-fit: unset;">
+    <div class="photo-block native" data-src="forte-1.jpg">
+      <img src="forte-1.jpg" alt="France" loading="lazy">
     </div>
   </div>
   <p class="photo-caption">France</p>
@@ -673,8 +682,8 @@
   </div>
 
   <div class="photo-row">
-    <div class="photo-block" style="aspect-ratio: auto;" data-src="europe2ndpass18.jpg">
-      <img src="europe2ndpass18.jpg" alt="Villa Balbi — room 425, Sestri Levante" loading="lazy" style="width:100%; height:auto; object-fit: unset;">
+    <div class="photo-block native" data-src="europe2ndpass18.jpg">
+      <img src="europe2ndpass18.jpg" alt="Villa Balbi — room 425, Sestri Levante" loading="lazy">
     </div>
   </div>
   <p class="photo-caption">Villa Balbi — Sestri Levante</p>
@@ -682,8 +691,8 @@
   <div style="height:4px"></div>
 
   <div class="photo-row">
-    <div class="photo-block" style="aspect-ratio: auto;" data-src="europe2ndpass20.jpg">
-      <img src="europe2ndpass20.jpg" alt="Duomo di Firenze — rooftop" loading="lazy" style="width:100%; height:auto; object-fit: unset;">
+    <div class="photo-block native" data-src="europe2ndpass20.jpg">
+      <img src="europe2ndpass20.jpg" alt="Duomo di Firenze — rooftop" loading="lazy">
     </div>
   </div>
   <p class="photo-caption">Duomo di Firenze</p>
@@ -691,8 +700,8 @@
   <div style="height:4px"></div>
 
   <div class="photo-row">
-    <div class="photo-block" style="aspect-ratio: auto;" data-src="europe2ndpass17.jpg">
-      <img src="europe2ndpass17.jpg" alt="Villa Balbi — garden" loading="lazy" style="width:100%; height:auto; object-fit: unset;">
+    <div class="photo-block native" data-src="europe2ndpass17.jpg">
+      <img src="europe2ndpass17.jpg" alt="Villa Balbi — garden" loading="lazy">
     </div>
   </div>
   <p class="photo-caption">Villa Balbi — Sestri Levante</p>
@@ -784,8 +793,8 @@
   </div>
 
   <div class="photo-row">
-    <div class="photo-block" style="aspect-ratio: auto;" data-src="forastaff19.jpg">
-      <img src="forastaff19.jpg" alt="Viceroy — silhouettes" loading="lazy" style="width:100%; height:auto; object-fit: unset;">
+    <div class="photo-block native" data-src="forastaff19.jpg">
+      <img src="forastaff19.jpg" alt="Viceroy — silhouettes" loading="lazy">
     </div>
   </div>
   <p class="photo-caption" style="color: rgba(232,217,192,0.5);">Viceroy — Mexico</p>
